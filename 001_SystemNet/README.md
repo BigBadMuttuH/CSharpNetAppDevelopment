@@ -1,4 +1,5 @@
 ﻿### Модель OSI
+
 1. Физический слой (Physical Layer)
 2. Канальный слой (Data Link Layer)
 3. Сетевой слой (Network Layer)
