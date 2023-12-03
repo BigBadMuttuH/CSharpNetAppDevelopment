@@ -27,8 +27,9 @@ public static class Program
             {
                 client.Connect(remoteEndPoint);
             }
-            catch
+            catch(SocketException e)
             {
+                Console.WriteLine($"ErrorCode {e.ErrorCode}, message = {e.Message}");
             }
 
             if (client.Connected)
@@ -44,24 +45,24 @@ public static class Program
             }
 
             var bytes = Encoding.UTF8.GetBytes("Привет.");
-            // Console.WriteLine("Нажмите клавишу для отправки.");
-            // Console.ReadKey();
+            Console.WriteLine("Нажмите клавишу для отправки.");
+            Console.ReadKey();
+            
+            var count = client.Send(bytes);
+            if (count == bytes.Length)
+                Console.WriteLine("Отправлено!");
+            else
+                Console.WriteLine("Что-то пошло не так.");
+
+            // if (client.Poll(100, SelectMode.SelectWrite) && client.Poll(100, SelectMode.SelectError))
+            // {
+            //     var count = client.Send(bytes);
             //
-            // var count = client.Send(bytes);
-            // if (count == bytes.Length)
-            //     Console.WriteLine("Отправлено!");
-            // else
-            //     Console.WriteLine("Что-то пошло не так.");
-
-            if (client.Poll(100, SelectMode.SelectWrite) && client.Poll(100, SelectMode.SelectError))
-            {
-                var count = client.Send(bytes);
-
-                if (count == bytes.Length)
-                    Console.WriteLine("Отправлено!");
-                else
-                    Console.WriteLine("Что-то пошло не так.");
-            }
+            //     if (count == bytes.Length)
+            //         Console.WriteLine("Отправлено!");
+            //     else
+            //         Console.WriteLine("Что-то пошло не так.");
+            // }
         }
     }
 }
