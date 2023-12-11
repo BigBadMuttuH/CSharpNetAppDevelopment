@@ -25,8 +25,9 @@ internal class UdpChatServer
             while (isRunning)
                 if (udpClient.Available > 0)
                 {
-                    var clientThread = new Thread(HandleClient);
-                    clientThread.Start();
+                    // var clientThread = new Thread(HandleClient);
+                    // clientThread.Start();
+                    ThreadPool.QueueUserWorkItem(HandleClient);
                 }
         });
         listenThread.Start();
@@ -41,7 +42,8 @@ internal class UdpChatServer
         Console.WriteLine("Сервер остановлен.");
     }
 
-    private void HandleClient()
+    // private void HandleClient()
+    private void HandleClient(object? state)
     {
         try
         {

@@ -40,9 +40,9 @@ public static class Program
     // которое определяет все IP-адреса интернет-ресурса и определяет до которого из них лучше Ping.
     private static void Ex02()
     {
-        var sait = "yandex.ru";
+        var site = "yandex.ru";
 
-        var ipAddress = Dns.GetHostAddresses(sait, AddressFamily.InterNetwork);
+        var ipAddress = Dns.GetHostAddresses(site, AddressFamily.InterNetwork);
         foreach (var address in ipAddress)
             Console.WriteLine(address);
 
