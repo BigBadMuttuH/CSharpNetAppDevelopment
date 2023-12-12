@@ -48,7 +48,7 @@ internal class UdpChatServer
             }
             else
             {
-                await Task.Delay(100, token); // Небольшая задержка для снижения нагрузки на процессор
+                await Task.Delay(100, token);
             }
     }
 
