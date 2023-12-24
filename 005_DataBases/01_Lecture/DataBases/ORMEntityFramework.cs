@@ -73,17 +73,18 @@ public class ORMEntityFramework
 
         using (var ctx = new OrmDbContext(optionsBuilder.Options))
         {
-            var user = new User() { Name = "Николай" };
+            var user = new User { Name = "Николай" };
             user.Messages = new HashSet<Message>();
-            user.Messages.Add(new Message {MessageContext = "Привет!"});
-            user.Messages.Add(new Message {MessageContext = "Я Коля!"});
-            
+            user.Messages.Add(new Message { MessageContext = "Привет!" });
+            user.Messages.Add(new Message { MessageContext = "Я Коля!" });
+
             ctx.Add(user);
             ctx.SaveChanges();
-            int num = ctx.SaveChanges();
+            var num = ctx.SaveChanges();
             Console.WriteLine("Было изменено" + num + "Строк");
         }
     }
+
     public static void Ex04()
     {
         var connectionString = ConnectionString;
@@ -94,13 +95,9 @@ public class ORMEntityFramework
         using (var ctx = new OrmDbContext(optionsBuilder.Options))
         {
             var user = ctx.Users.FirstOrDefault(x => x.Name == "Коля");
-            if (user != null)
-            {
-                user.Name = "Николай";
-
-            }
+            if (user != null) user.Name = "Николай";
             ctx.SaveChanges();
-            int num = ctx.SaveChanges();
+            var num = ctx.SaveChanges();
             Console.WriteLine("Было изменено " + num + " Строк");
         }
     }

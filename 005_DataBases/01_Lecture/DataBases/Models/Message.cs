@@ -9,7 +9,7 @@ public class Message
     [Key] [Column("id")] public int Id { get; set; }
 
     [Column("user_id")] public int UserId { get; set; }
-    
+
     [Column("message")] public string? MessageContext { get; set; }
 
     // ленивая загрузка связей, один к одному
